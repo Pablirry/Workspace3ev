@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Taller {
 
     static Scanner sc = new Scanner(System.in);
-
+    
     static List<Coche> taller = new ArrayList<>();
     public static void main (String[] args){
 
