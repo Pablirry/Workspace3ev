@@ -9,38 +9,6 @@ public class Taller {
     static Scanner sc = new Scanner(System.in);
     
     static List<Coche> taller = new ArrayList<>();
-    public static void main (String[] args){
-
-        int opcion;
-        do {
-            System.out.println("\nOpciones:");
-            System.out.println("1.- Entrada nueva reparación");
-            System.out.println("2.- Salida de coche reparado");
-            System.out.println("3.- Listado de vehículos");
-            System.out.println("4.- Salir");
-            System.out.print("Elija una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine(); // Limpiar el buffer del scanner
-
-            switch (opcion) {
-                case 1:
-                    entradaNuevaReparacion();
-                    break;
-                case 2:
-                    salidaCocheReparado();
-                    break;
-                case 3:
-                    listarVehiculos();
-                    break;
-                case 4:
-                    System.out.println("Saliendo del programa...");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Inténtalo de nuevo.");
-                    break;
-            }
-        } while (opcion != 4);
-    }
 
     public static void entradaNuevaReparacion() {
         System.out.println("\nRegistrando entrada de nuevo vehículo:");
@@ -50,7 +18,7 @@ public class Taller {
         String matricula = sc.nextLine();
         System.out.print("Marca: ");
         String marca = sc.nextLine();
-        taller.add(new Coche(propietario, matricula, marca, false));
+        taller.add(new Coche(propietario, matricula, marca));
         System.out.println("Entrada registrada exitosamente.");
     }
 

@@ -7,11 +7,11 @@ public class Coche {
     protected String marca;
     protected boolean reparado;
 
-    public Coche(String propietario, String matricula, String marca, boolean reparado) {
+    public Coche(String propietario, String matricula, String marca) {
         this.propietario = propietario;
         this.matricula = matricula;
         this.marca = marca;
-        this.reparado = reparado;
+        this.reparado = false;
     }
 
     public String getPropietario() {
