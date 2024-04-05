@@ -1,15 +1,9 @@
 package Ejercicio3;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
 public class Prueba {
 
     static Scanner sc = new Scanner(System.in);
-    
-    static List<Coche> taller = new ArrayList<>();
-
     public static void main (String[] args){
 
         int opcion;
