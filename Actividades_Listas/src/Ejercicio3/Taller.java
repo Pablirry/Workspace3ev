@@ -32,7 +32,6 @@ public class Taller {
                 coche.reparado = true;
                 System.out.println("Coche encontrado y marcado como reparado.");
                 encontrado = true;
-                break;
             }
         }
         if (!encontrado) {
