@@ -38,14 +38,6 @@ public class Coche {
         this.marca = marca;
     }
 
-    public boolean isReparado() {
-        return reparado;
-    }
-
-    public void setReparado(boolean reparado) {
-        this.reparado = reparado;
-    }
-
     @Override
     public String toString() {
         return "Coche [propietario=" + propietario + ", matricula=" + matricula + ", marca=" + marca + ", reparado="
