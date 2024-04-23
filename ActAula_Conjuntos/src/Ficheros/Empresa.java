@@ -1,6 +1,5 @@
 package Ficheros;
 
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.*;
@@ -47,28 +46,26 @@ public class Empresa {
 	}
 
 	public void repartirPaquetes(int cps[]) {
-		int inCp = 0;
-		for (Vehiculo v : vehiculos) {
-			if (v.getCp() == null) {
-				String cpAsignado = String.valueOf(cps[inCp]);
-				v.setCp(cpAsignado);
-				for (Paquete p : paquetes) {
-					if (String.valueOf(p.getCp()).equals(cpAsignado)) {
-						v.añadirPaquete(p);
+		for (int cp : cps) {
+			boolean asignado = false;
+			for (Vehiculo vehiculo : vehiculos) {
+				if (!asignado && vehiculo.getCp() == -1) {
+					vehiculo.setCp(cp);
+					for (Paquete paquete : paquetes) {
+						if (paquete.getCp() == cp) {
+							vehiculo.añadirPaquete(paquete);
+						}
 					}
+					asignado = true;
 				}
 			}
 		}
 	}
 
 	public void mostrarReparto() {
-
+		System.out.println("Detalles reparto:");
 		for (Vehiculo v : vehiculos) {
-			System.out.println(v.toString());
-			System.out.println("Paquetes asignados:");
-			for (Paquete p : v.getPaquetes()) {
-				System.out.println(p.toString());
-			}
+			v.mostrarVehiculo();
 		}
 	}
 }

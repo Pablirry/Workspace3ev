@@ -2,11 +2,11 @@ package Ficheros;
 
 import java.util.LinkedList;
 
-public class Vehiculo implements Comparable <Vehiculo> {
+public class Vehiculo implements Comparable<Vehiculo> {
 	private String matricula;
 	private String dni;
 	private String nombre;
-	private String cp;
+	private int cp = -1;
 	private LinkedList<Paquete> paquetes;
 
 	public Vehiculo(String matricula, String dni, String nombre) {
@@ -20,11 +20,11 @@ public class Vehiculo implements Comparable <Vehiculo> {
 		paquetes.add(p);
 	}
 
-	public String getCp() {
+	public int getCp() {
 		return cp;
 	}
 
-	public void setCp(String cp) {
+	public void setCp(int cp) {
 		this.cp = cp;
 	}
 
@@ -44,14 +44,19 @@ public class Vehiculo implements Comparable <Vehiculo> {
 		return paquetes;
 	}
 
-    @Override
-    public String toString() {
-        return "Vehiculo [matricula=" + matricula + ", dni=" + dni + ", nombre=" + nombre + "]";
-    }
+	public void mostrarVehiculo() {
+		System.out.println("Vehiculo: [matricula=" + matricula + ", dni=" +
+				dni + ", nombre=" + nombre + ", cpAsignado=" + cp + "]");
+		if (paquetes.size() > 0) {
+			for (Paquete paquete : paquetes) {
+				System.out.println('\t' + paquete.toString());
+			}
+		}
+	}
 
 	@Override
-    public int compareTo(Vehiculo v) {
-        return this.matricula.compareTo(v.matricula);
-    }
+	public int compareTo(Vehiculo v) {
+		return this.matricula.compareTo(v.matricula);
+	}
 
 }
