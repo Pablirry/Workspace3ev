@@ -6,38 +6,29 @@ import java.util.List;
 public class Ticket {
 
     private String fecha;
-    private String nombreDependienta;
+    private String dependienta;
     private List<DetalleTicket> detalles;
 
-    public Ticket(String fecha, String nombreDependienta) {
+    public Ticket(String fecha, String dependienta) {
         this.fecha = fecha;
-        this.nombreDependienta = nombreDependienta;
+        this.dependienta = dependienta;
         this.detalles = new ArrayList<>();
     }
 
-    public void añadirDetallePedido(Producto producto, int cantidad) {
-        DetalleTicket detalle = new DetalleTicket(producto, cantidad);
+    public void agregarDetalle(DetalleTicket detalle) {
         detalles.add(detalle);
     }
 
-    public void mostrarTicket() {
-        System.out.println("Fecha: " + fecha);
-        System.out.println("Dependienta: " + nombreDependienta);
-        System.out.println("Detalles del pedido:");
-        for (DetalleTicket detalle : detalles) {
-            System.out.println("Nombre del producto: " + detalle.getNombreProducto());
-            System.out.println("Cantidad comprada: " + detalle.getCantidad());
-            System.out.println("Total: " + detalle.getTotal());
-        }
+    public String getFecha() {
+        return fecha;
     }
 
-    public DetalleTicket getDetallePorProducto(String nombreProducto) {
-        for (DetalleTicket detalle : detalles) {
-            if (detalle.getNombreProducto().equals(nombreProducto)) {
-                return detalle;
-            }
-        }
-        return null;
+    public String getDependenta() {
+        return dependienta;
+    }
+
+    public List<DetalleTicket> getDetalles() {
+        return detalles;
     }
 
 }

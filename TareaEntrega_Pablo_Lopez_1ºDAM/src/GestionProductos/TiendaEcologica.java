@@ -1,63 +1,73 @@
 package GestionProductos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class TiendaEcologica {
 
-    public Set<Producto> productos = new TreeSet<>();
-    public Set<Ticket> tickets = new HashSet<>();
-    private Map<String, List<Integer>> preciosProductos = new TreeMap<>();
+    private TreeSet<Producto> productos;
+    private HashSet<Ticket> tickets;
+    private Map<String, List<Double>> preciosProductos;
 
     public TiendaEcologica() {
         this.productos = new TreeSet<>();
         this.tickets = new HashSet<>();
+        this.preciosProductos = new HashMap<>();
     }
 
-    public void crearTicket(String fecha, String nombreDependienta) {
-        Ticket ticket = new Ticket(fecha, nombreDependienta);
+    public TreeSet<Producto> getProductos() {
+        return productos;
+    }
+
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+    public void generarTicket(Ticket ticket) {
         tickets.add(ticket);
     }
 
-    public void añadirDetallePedido(Producto producto, int cantidad) {
-        DetalleTicket detalle = new DetalleTicket(producto, cantidad);
-        producto.setCantidad(producto.getCantidad() - cantidad);
-        preciosProductos.get(producto.getNombre()).add(producto.getPrecio());
-        detalle.setTotal(producto.getPrecio() * cantidad);
+    public void actualizarPrecio(Producto p, double nuevoPrecio) {
+        if (p == null) {
+            throw new IllegalArgumentException("El producto no puede ser nulo");
+        }
+        List<Double> preciosHistoricos = preciosProductos.computeIfAbsent(p.getNombre(), k -> new ArrayList<>());
+        preciosHistoricos.add(p.getPrecio());
+        p.setPrecio(nuevoPrecio);
+    }
+
+    public void mostrarProductos() {
+        for (Producto producto : productos) {
+            System.out.println("Nombre: " + producto.getNombre());
+            System.out.println("Cantidad disponible: " + producto.getCantidad());
+            System.out.println("Precio: " + producto.getPrecio());
+            System.out.println();
+        }
     }
 
     public void mostrarTickets() {
         for (Ticket ticket : tickets) {
-            ticket.mostrarTicket();
-        }
-    }
-
-    public Producto buscarProducto(int número) {
-        for (Producto producto : productos) {
-            if (producto.getNombre().equals("producto" + número)) {
-                return producto;
+            System.out.println("Fecha: " + ticket.getFecha());
+            System.out.println("Dependienta: " + ticket.getDependenta());
+            System.out.println("\tDetalles:");
+            for (DetalleTicket detalle : ticket.getDetalles()) {
+                System.out.println("\t  Producto: " + detalle.getProducto().getNombre());
+                System.out.println("\t  Cantidad: " + detalle.getCantidad());
+                System.out.println("\t  Precio: " + detalle.getProducto().getPrecio());
+                System.out.println();
             }
         }
-        return null;
     }
 
-    public void añadirProducto(Producto producto) {
-        productos.add(producto);
-        preciosProductos.put(producto.getNombre(), new ArrayList<>());
-        preciosProductos.get(producto.getNombre()).add(producto.getPrecio());
+    public void mostrarPrecios() {
+        for (Map.Entry<String, List<Double>> p : preciosProductos.entrySet()) {
+            System.out.println("Producto: " + p.getKey());
+            System.out.println("Precios históricos: " + p.getValue());
+        }
     }
 
-    public void eliminarProducto(Producto producto) {
-        productos.remove(producto);
-        preciosProductos.remove(producto.getNombre());
-    }
-
-    public List<Integer> getPreciosProducto(String nombreProducto) {
-        return preciosProductos.get(nombreProducto);
-    }
 }
