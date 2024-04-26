@@ -1,9 +1,20 @@
-package GestionProductos;
+package Gestion;
+
+import GestionProductos.DetalleTicket;
+import GestionProductos.Producto;
+import GestionProductos.Ticket;
+import GestionProductos.TiendaEcologica;
 
 public class Tienda {
 
+    /**
+     * Metodo para cargar los datos de la tienda
+     * 
+     * @param t : TiendaEcologica
+     */
+
     private static void cargaDatos(TiendaEcologica t) {
-        
+
         Producto p1 = new Producto("Manzanas ecológicas", 10, 1.5);
         Producto p2 = new Producto("Aceite de oliva ecológico", 5, 12.0);
         Producto p3 = new Producto("Pan ecológico", 20, 2.0);
@@ -34,6 +45,8 @@ public class Tienda {
         t.actualizarPrecio(p1, 3.0);
         t.actualizarPrecio(p3, 3.0);
         t.actualizarPrecio(p3, 3.5);
+
+        
     }
 
     public static void main(String[] args) {
