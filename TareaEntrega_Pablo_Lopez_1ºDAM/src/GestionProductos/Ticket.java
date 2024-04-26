@@ -1,12 +1,13 @@
-package Ejercicio2;
+package GestionProductos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ticket {
 
     private String fecha;
     private String nombreDependienta;
-    private ArrayList<DetalleTicket> detalles;
+    private List<DetalleTicket> detalles;
 
     public Ticket(String fecha, String nombreDependienta) {
         this.fecha = fecha;
@@ -28,23 +29,15 @@ public class Ticket {
             System.out.println("Cantidad comprada: " + detalle.getCantidad());
             System.out.println("Total: " + detalle.getTotal());
         }
-        System.out.println("Importe final del ticket: " + calcularImporteFinal());
     }
 
-    private int calcularImporteFinal() {
-        int importeFinal = 0;
+    public DetalleTicket getDetallePorProducto(String nombreProducto) {
         for (DetalleTicket detalle : detalles) {
-            importeFinal += detalle.getTotal();
+            if (detalle.getNombreProducto().equals(nombreProducto)) {
+                return detalle;
+            }
         }
-        return importeFinal;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public String getNombreDependienta() {
-        return nombreDependienta;
+        return null;
     }
 
 }

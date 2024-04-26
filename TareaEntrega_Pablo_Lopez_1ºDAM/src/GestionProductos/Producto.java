@@ -1,15 +1,15 @@
-package Ejercicio2;
+package GestionProductos;
 
-public class Producto implements Comparable<Producto>  {
+public class Producto implements Comparable<Producto> {
 
     private String nombre;
     private int cantidad;
     private int precio;
 
-    public Producto(int numero, String nombre, int cantidad, int precio) {
-        this.nombre = "Producto" + numero;
-        this.cantidad = (int) (Math.random() * 50) + 1;
-        this.precio = (int) (Math.random() * 100) + 1;
+    public Producto(int número, String nombre, int cantidad, int precio) {
+        this.nombre = "Producto" + número;
+        this.cantidad = cantidad;
+        this.precio = precio;
     }
 
     public String getNombre() {
@@ -18,6 +18,10 @@ public class Producto implements Comparable<Producto>  {
 
     public int getCantidad() {
         return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public int getPrecio() {

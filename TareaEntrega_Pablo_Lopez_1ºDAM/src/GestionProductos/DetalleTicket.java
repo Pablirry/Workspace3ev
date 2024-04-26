@@ -1,4 +1,4 @@
-package Ejercicio2;
+package GestionProductos;
 
 public class DetalleTicket {
 
@@ -15,7 +15,7 @@ public class DetalleTicket {
         }
         this.nombreProducto = producto.getNombre();
         this.cantidad = cantidadComprada;
-        this.total = producto.getPrecio() * cantidadComprada;
+        this.total = 0;
     }
 
     public String getNombreProducto() {
@@ -28,6 +28,10 @@ public class DetalleTicket {
 
     public int getTotal() {
         return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
 }

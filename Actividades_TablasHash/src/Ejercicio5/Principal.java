@@ -21,17 +21,25 @@ public class Principal {
         taller.insertarVehiculo(vehiculo1);
         taller.insertarVehiculo(vehiculo2);
 
-        // Realizar reparaciones
-        taller.insertarReparacion("12345678A", "1111AAA");
-        taller.insertarReparacion("87654321B", "2222BBB");
-        taller.insertarReparacion("12345678A", "2222BBB");
+        Reparacion r1 = new Reparacion("1111AAA", "12345678A", 2000);
+        Reparacion r2 = new Reparacion("2222BBB", "87654321B", 7000);
+        Reparacion r3 = new Reparacion("2222BBB", "12345678A", 1500);
+
+        r1.setPrecio(2000);
+        r2.setPrecio(1500);
+        r3.setPrecio(6000);
+
+        taller.insertarReparacion(r1);
+        taller.insertarReparacion(r2);
+        taller.insertarReparacion(r3);
 
         // Mostrar datos del taller
         taller.mostrarDatos();
 
         // Obtener reparaciones por cliente
         System.out.println("\nReparaciones por cliente:");
-        System.out.println(taller.ReparacionesPorCliente("12345678A"));
+        System.out.println(taller.ReparacionesPorCliente(cliente1));
+
 
         // Obtener reparaciones por vehículo
         System.out.println("\nReparaciones por vehículo:");

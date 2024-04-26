@@ -25,12 +25,12 @@ public class Taller {
         this.clientes.put(c.getDni(), c);
     }
 
-    public void insertarReparacion(String dni, String matricula) {
-        Cliente cliente = this.clientes.get(dni);
-        Vehiculo vehiculo = this.vehiculos.get(matricula);
+    public void insertarReparacion(Reparacion r) {
+        Cliente cliente = this.clientes.get(r.getDni());
+        Vehiculo vehiculo = this.vehiculos.get(r.getMatricula());
 
         if (cliente != null && vehiculo != null) {
-            Reparacion reparacion = new Reparacion(matricula, dni);
+            Reparacion reparacion = new Reparacion(r.getMatricula(), r.getDni(), r.getPrecio());
             reparaciones.add(reparacion);
         } else {
             System.out.println("Error, no existe");
@@ -58,11 +58,11 @@ public class Taller {
         }
     }
 
-    public List<Reparacion> ReparacionesPorCliente(String dni) {
+    public List<Reparacion> ReparacionesPorCliente(Cliente c) {
         List<Reparacion> reparacionesCliente = new ArrayList<>();
 
         for (Reparacion rep : reparaciones) {
-            if (rep.getDni().equals(dni)) {
+            if (rep.getDni().equals(c.getDni())) {
                 reparacionesCliente.add(rep);
             }
         }

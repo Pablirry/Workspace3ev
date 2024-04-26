@@ -8,10 +8,11 @@ public class Reparacion {
     private String dni;
     private double precio;
 
-    public Reparacion(String matricula, String dni) {
+    public Reparacion(String matricula, String dni, double precio) {
         this.id = ++idIncr;
         this.matricula = matricula;
         this.dni = dni;
+        this.precio = precio;
     }
 
     public int getId() {
@@ -28,6 +29,10 @@ public class Reparacion {
 
     public double getPrecio() {
         return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     @Override
