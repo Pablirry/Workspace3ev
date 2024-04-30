@@ -15,9 +15,9 @@ public class Tienda {
 
     private static void cargaDatos(TiendaEcologica t) {
 
-        Producto p1 = new Producto("Manzanas ecológicas", 10, 1.5);
-        Producto p2 = new Producto("Aceite de oliva ecológico", 5, 12.0);
-        Producto p3 = new Producto("Pan ecológico", 20, 2.0);
+        Producto p1 = new Producto("Producto 1", 10, 1.5);
+        Producto p2 = new Producto("Producto 2", 5, 12.0);
+        Producto p3 = new Producto("Producto 3", 20, 2.0);
 
         t.agregarProducto(p1);
         t.agregarProducto(p2);
@@ -41,29 +41,33 @@ public class Tienda {
 
         t.generarTicket(t2);
 
+        System.out.println("Productos:");
+        t.mostrarProductos();
+        System.out.println("--------------------------------------");
+        t.eliminarProducto(p2);
+        System.out.println("Tickets:");
+        t.mostrarTickets();
+        System.out.println("--------------------------------------");
+
         t.actualizarPrecio(p1, 1.7);
         t.actualizarPrecio(p1, 3.0);
         t.actualizarPrecio(p3, 3.0);
         t.actualizarPrecio(p3, 3.5);
 
         
+        System.out.println("Productos actualizados:");
+        System.out.println();
+        t.mostrarProductos();
+        System.out.println("--------------------------------------");
+        System.out.println("Precios");
+        t.mostrarPrecios();
+
     }
 
     public static void main(String[] args) {
         TiendaEcologica t = new TiendaEcologica();
         cargaDatos(t);
-        System.out.println("Productos:");
-        t.mostrarProductos();
-        System.out.println("--------------------------------------");
-        System.out.println("Tickets:");
-        t.mostrarTickets();
-        System.out.println("--------------------------------------");
-        System.out.println("Precios");
-        t.mostrarPrecios();
-        System.out.println("--------------------------------------");
-        System.out.println("Productos actualizados:");
-        System.out.println();
-        t.mostrarProductos();
+
     }
 
 }

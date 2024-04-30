@@ -41,6 +41,10 @@ public class TiendaEcologica {
         productos.add(producto);
     }
 
+    public void eliminarProducto(Producto p){
+        productos.remove(p);
+    }
+
     /**
      * Metodo para generar un ticket
      * @param ticket
