@@ -69,8 +69,8 @@ public class Taller {
 
     public void listarReparacionesCliente(String dni) {
         for (Reparacion r : reparaciones) {
-            if (r.getDniCliente().equals(dni)) {
-                System.out.println(r);
+            if (r.getDniCliente().equals(r.getDniCliente())) {
+                System.out.println(r.toString());
             }
         }
     }
