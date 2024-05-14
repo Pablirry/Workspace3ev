@@ -50,18 +50,18 @@ public class Edificio {
         return texto;
     }
 
-    public List<Propietario> getPropietarios(int piso, char puerta) {
-        Apartamento apartamento = getApartamento(piso, puerta);
-        return apartamento.getPropietarios();
+    public List<Propietario> getPropietarios(int piso, char puerta) throws ExcepcionApartamentoNoEncontrado {
+        Apartamento a = this.getApartamento(piso, puerta);
+        return a.getPropietarios();
     }
 
-    public Apartamento getApartamento(int piso, char puerta) {
+    public Apartamento getApartamento(int piso, char puerta) throws ExcepcionApartamentoNoEncontrado {
         for (int i = 0; i < apartamentos.size(); i++) {
-            if (apartamentos.get(i).getPiso() == piso && apartamentos.get(i).getPuerta() == puerta) {
-                return apartamentos.get(i);
-            }
+            Apartamento a = apartamentos.get(i);
+            if (a.getPiso() == piso && a.getPuerta() == puerta)
+                return a;
         }
-        return null;
+        throw new ExcepcionApartamentoNoEncontrado("Apartamento " + piso + "-" + puerta + " no encontrado");
     }
 
     public String getCiudad() {
