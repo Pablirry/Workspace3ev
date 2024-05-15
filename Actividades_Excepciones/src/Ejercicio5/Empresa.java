@@ -6,13 +6,17 @@ import java.util.List;
 public class Empresa {
 
     private String nombre;
-    private String cif;
+    private String CIF;
     private List<Departamento> departamentos;
 
-    public Empresa(String nombre, String cif) {
+    public Empresa(String nombre, String cIF) {
         this.nombre = nombre;
-        this.cif = cif;
+        CIF = cIF;
         this.departamentos = new ArrayList<Departamento>();
+    }
+
+    public void añadirDepartamento(Departamento d) {
+        departamentos.add(d);
     }
 
     public String getNombre() {
@@ -23,12 +27,12 @@ public class Empresa {
         this.nombre = nombre;
     }
 
-    public String getCif() {
-        return cif;
+    public String getCIF() {
+        return CIF;
     }
 
-    public void setCif(String cif) {
-        this.cif = cif;
+    public void setCIF(String cIF) {
+        CIF = cIF;
     }
 
     public List<Departamento> getDepartamentos() {
@@ -39,46 +43,37 @@ public class Empresa {
         this.departamentos = departamentos;
     }
 
-    public void agregarDepartamento(Departamento departamento) {
-        if (departamentos.contains(departamento)) {
-            throw new IllegalArgumentException("El departamento ya existe en la compañía");
-        }
-        departamentos.add(departamento);
-    }
-
-    public List<Empleado> getEmpleadosPorDepartamento(String nombreDepartamento)
-            throws DepartamentoNoEncontradoException {
-        for (Departamento departamento : departamentos) {
-            if (departamento.getNombre().equals(nombreDepartamento)) {
-                return departamento.getEmpleados();
-            }
-        }
-        throw new DepartamentoNoEncontradoException("Departamento no encontrado: " + nombreDepartamento);
-    }
-
-    public Departamento getDepartamentoPorNombre(String nombreDepartamento) throws DepartamentoNoEncontradoException {
-        for (Departamento departamento : departamentos) {
-            if (departamento.getNombre().equals(nombreDepartamento)) {
-                return departamento;
-            }
-        }
-        throw new DepartamentoNoEncontradoException("Departamento no encontrado: " + nombreDepartamento);
-    }
-
-    public Empleado getEmpleadoPorNif(String nif) throws EmpleadoNoEncontradoException {
-        for (Departamento departamento : departamentos) {
-            for (Empleado empleado : departamento.getEmpleados()) {
-                if (empleado.getNif().equals(nif)) {
-                    return empleado;
-                }
-            }
-        }
-        throw new EmpleadoNoEncontradoException("Empleado no encontrado: " + nif);
-    }
-
     @Override
     public String toString() {
-        return "Empresa [nombre=" + nombre + ", cif=" + cif + ", departamentos=" + departamentos + "]";
+        String texto = "Empresa [nombre=" + nombre + ", CIF=" + CIF + "]\n";
+        for (Departamento d : departamentos) {
+            texto += d.toString();
+        }
+        return texto;
     }
 
+    public void añadirEmpleado(String nombreDep, Empleado empleado) throws DepartamentoNotFoundException {
+        boolean encontrado = false;
+        for (Departamento d : departamentos) {
+            if (d.getNombre().compareTo(nombreDep) == 0) {
+                d.añadirEmpleado(empleado);
+                encontrado = true;
+            }
+        }
+        if (encontrado == false) {
+            throw new DepartamentoNotFoundException("departamento " + nombreDep + " no encontrado");
+        }
+
+    }
+
+    public void borrarDepartamento(String nombreDep) throws DepartamentoNotFoundException {
+        for (int i = 0; i < departamentos.size(); i++) {
+            Departamento d = departamentos.get(i);
+            if (d.getNombre().compareTo(nombreDep) == 0) {
+                departamentos.remove(i);
+                return;
+            }
+        }
+        throw new DepartamentoNotFoundException("departamento " + nombreDep + " no encontrado");
+    }
 }

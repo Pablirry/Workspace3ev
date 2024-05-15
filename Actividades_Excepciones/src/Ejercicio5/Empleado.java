@@ -4,13 +4,11 @@ public class Empleado {
 
     private String nombre;
     private String apellidos;
-    private String nif;
     private String puesto;
-
-    public Empleado(String nombre, String apellidos, String nif, String puesto) {
+    
+    public Empleado(String nombre, String apellidos, String puesto) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.nif = nif;
         this.puesto = puesto;
     }
 
@@ -30,14 +28,6 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
-    public String getNif() {
-        return nif;
-    }
-
-    public void setNif(String nif) {
-        this.nif = nif;
-    }
-
     public String getPuesto() {
         return puesto;
     }
@@ -48,7 +38,6 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado [nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", puesto=" + puesto + "]";
+        return "Empleado [nombre=" + nombre + ", apellidos=" + apellidos + ", puesto=" + puesto + "]";
     }
-
 }
