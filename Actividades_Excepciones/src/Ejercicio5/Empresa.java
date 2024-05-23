@@ -76,4 +76,40 @@ public class Empresa {
         }
         throw new DepartamentoNotFoundException("departamento " + nombreDep + " no encontrado");
     }
+
+    public List<Empleado> getEmpleadosDepartamento(String nombreDep) throws DepartamentoNotFoundException {
+        Departamento d = null;
+        for(int i=0; i<departamentos.size() && d==null; i++) {
+            Departamento dep = departamentos.get(i);
+            if(dep.getNombre().compareTo(nombreDep)==0){
+                d=dep;
+            }
+        }
+        if(d==null){
+            throw new DepartamentoNotFoundException("Departamento " + nombreDep + " no encontrado");
+        }else{
+            return d.getEmpleados();
+        }
+    }
+
+    public Departamento buscarDepartamento(String nombreDep) throws DepartamentoNotFoundException {
+
+        for(Departamento d:departamentos){
+            if(d.getNombre().compareTo(nombreDep)==0){
+                return d;
+            }
+        }
+        throw new DepartamentoNotFoundException("Departamento no encontrado");
+    }
+
+    public Empleado buscarEmpleado(String nombre) throws EmpleadoNotFoundException {
+        for (Departamento d : departamentos) {
+            for (Empleado e : d.getEmpleados()) {
+                if (e.getNombre().compareTo(nombre) == 0) {
+                    return e;
+                }
+            }
+        }
+        throw new EmpleadoNotFoundException("Empleado no encontrado");
+    }
 }
