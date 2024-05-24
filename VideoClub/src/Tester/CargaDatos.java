@@ -1,7 +1,6 @@
 package Tester;
 
 import java.text.ParseException;
-
 import Excepciones.miExcepcion;
 import Logica.VideoClub;
 import Modelo.Cinta;
