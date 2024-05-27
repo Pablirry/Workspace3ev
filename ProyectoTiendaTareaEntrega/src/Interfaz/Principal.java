@@ -79,11 +79,11 @@ public class Principal {
 				break;
 			case 2:
 				System.out.print("Ingrese el email del cliente: ");
-				String email = new Scanner(System.in).nextLine();
+				String email = scanner.nextLine();
 				System.out.print("Ingrese el nuevo nombre: ");
-				String nuevoNombre = new Scanner(System.in).nextLine();
+				String nuevoNombre = scanner.nextLine();
 				System.out.print("Ingrese la nueva dirección: ");
-				String nuevaDireccion = new Scanner(System.in).nextLine();
+				String nuevaDireccion = scanner.nextLine();
 				try {
 					t.modificarCliente(email, nuevoNombre, nuevaDireccion, email);
 				} catch (ExcepcionClienteNoEncontrado e) {
@@ -92,7 +92,7 @@ public class Principal {
 				break;
 			case 3:
 				System.out.print("Ingrese el email del cliente: ");
-				String emailBorrar = new Scanner(System.in).nextLine();
+				String emailBorrar = scanner.nextLine();
 				try {
 					t.borrarCliente(emailBorrar);
 				} catch (ExcepcionClienteNoEncontrado e) {
@@ -122,13 +122,13 @@ public class Principal {
 				break;
 			case 2:
 				System.out.print("Ingrese el código del producto: ");
-				String codigo = new Scanner(System.in).nextLine();
+				String codigo = scanner.nextLine();
 				System.out.print("Ingrese el nuevo nombre: ");
-				String nuevoNombre = new Scanner(System.in).nextLine();
+				String nuevoNombre = scanner.nextLine();
 				System.out.print("Ingrese el nuevo precio: ");
-				double nuevoPrecio = new Scanner(System.in).nextDouble();
+				double nuevoPrecio = scanner.nextDouble();
 				System.out.print("Ingrese el nuevo stock: ");
-				int nuevoStock = new Scanner(System.in).nextInt();
+				int nuevoStock = scanner.nextInt();
 				try {
 					t.modificarProducto(codigo, nuevoNombre, nuevoPrecio, nuevoStock);
 				} catch (ExcepcionProductoNoEncontrado e) {
@@ -137,7 +137,7 @@ public class Principal {
 				break;
 			case 3:
 				System.out.print("Ingrese el código del producto: ");
-				String codigoBorrar = new Scanner(System.in).nextLine();
+				String codigoBorrar = scanner.nextLine();
 				try {
 					t.borrarProducto(codigoBorrar);
 				} catch (ExcepcionProductoNoEncontrado e) {

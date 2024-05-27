@@ -2,64 +2,71 @@ package Ejercicio1;
 
 public class Principal {
 
-	public static void main(String[] args) throws ExceptionDniNoEncontrado {
-		
+	public static void main(String[] args) throws Excepcion {
+
 		Taller taller = new Taller();
 
-	    // Insertar 3 clientes
-	    Dni dni1 = new Dni("12345678A");
-	    Dni dni2 = new Dni("87654321B");
-	    Dni dni3 = new Dni("11111111C");
-	    taller.anadirCliente(new Cliente(dni1, "Juan", "123456789"));
-	    taller.anadirCliente(new Cliente(dni2, "María", "987654321"));
-	    taller.anadirCliente(new Cliente(dni3, "Pedro", "555555555"));
+		// Crear 3 clientes diferentes
+		Cliente cliente1 = new Cliente("12345678A", "Juan", "123456789");
+		Cliente cliente2 = new Cliente("12345678B", "Pedro", "123456789");
+		Cliente cliente3 = new Cliente("12345678C", "Luis", "123456789");
 
-	    // Insertar 2 coches
-	    Matricula matricula1 = new Matricula("A-1234-BC");
-	    Matricula matricula2 = new Matricula("B-5678-DE");
-	    taller.anadirVehiculo(new Coche(matricula1, 10000, "Seat", "Ibiza"));
-	    taller.anadirVehiculo(new Coche(matricula2, 20000, "Renault", "Megane"));
+		// Insertar los clientes en el taller
+		try {
+			taller.añadirCliente(cliente1);
+			taller.añadirCliente(cliente2);
+			taller.añadirCliente(cliente3);
+		} catch (Excepcion e) {
+			System.err.println(e.getMessage());
+		}
 
-	    // Insertar 2 motos
-	    Matricula matricula3 = new Matricula("C-9876-FG");
-	    Matricula matricula4 = new Matricula("D-4321-HI");
-	    taller.anadirVehiculo(new Moto(matricula3, 5000, 125));
-	    taller.anadirVehiculo(new Moto(matricula4, 15000, 250));
+		// Crear 2 coches diferentes
+		Coche coche1 = new Coche(new Matricula("A-1234-BC"), 5, "Seat", "Ibiza");
+		Coche coche2 = new Coche(new Matricula("D-1234-EF"), 10, "Renault", "Clio");
 
-	    // Insertar 4 reparaciones
-	    taller.nuevaReparacion(dni1, matricula1, "2022-01-01");
-	    taller.nuevaReparacion(dni2, matricula2, "2022-02-01");
-	    taller.nuevaReparacion(dni3, matricula3, "2022-03-01");
-	    taller.nuevaReparacion(dni1, matricula4, "2022-04-01");
+		try {
+			// Insertar los coches en el taller
+			taller.añadirVehiculo(coche1);
+			taller.añadirVehiculo(coche2);
+		} catch (Excepcion e) {
+			System.out.println(e.getMessage());
+		}
 
-	    // Listar vehículos
-	    System.out.println("Vehículos:");
-	    for (Vehiculo vehiculo : taller.getVehiculos().values()) {
-	        System.out.println(vehiculo.toString());
-	    }
+		// Crear 2 motos diferentes
+		Moto moto1 = new Moto(new Matricula("G-1234-HI"), 15, 1000);
+		Moto moto2 = new Moto(new Matricula("J-1234-KL"), 20, 2000);
 
-	    // Listar Clientes
-	    System.out.println("\nClientes:");
-	    for (Cliente cliente : taller.getClientes()) {
-	        System.out.println(cliente.toString());
-	    }
+		try {
+			// Insertar las motos en el taller
+			taller.añadirVehiculo(moto1);
+			taller.añadirVehiculo(moto2);
+		} catch (Excepcion e) {
+			System.err.println(e.getMessage());
+		}
 
-	    // Listar reparaciones
-	    System.out.println("\nReparaciones:");
-	    for (Reparacion reparacion : taller.getReparaciones()) {
-	        System.out.println(reparacion.toString());
-	    }
+		try {
+			// Crear 4 reparaciones en el taller
+			taller.crearReparacion(cliente1.getDni(), coche1.getMatricula(), "01/01/2021");
+			taller.crearReparacion(cliente2.getDni(), coche2.getMatricula(), "02/01/2021");
+			taller.crearReparacion(cliente3.getDni(), moto1.getMatricula(), "03/01/2021");
+			taller.crearReparacion(cliente1.getDni(), moto2.getMatricula(), "04/01/2021");
+		} catch (Excepcion e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+		}
 
-	    // Listar reparaciones de un cliente
-	    try{
-	    	System.out.println("\nReparaciones del cliente con DNI " + dni1);
-	    	taller.listarReparacionesCliente(dni1);
-	    }catch (ExceptionDniNoEncontrado e) {
-	    	System.err.println(e.toString());
-	    }
-	    
-    }
+		// Mostrar los vehículos del taller
+		taller.mostrarVehiculos();
+
+		// Mostrar los clientes del taller
+		taller.mostrarClientes();
+
+		// Mostrar las reparaciones del taller
+		taller.mostrarReparaciones();
+
+		// Mostrar las reparaciones de un cliente
+		taller.mostrarReparacionesCliente(cliente1.getDni());
 
 	}
 
-
+}

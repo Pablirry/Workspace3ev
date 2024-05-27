@@ -2,16 +2,13 @@ package Ejercicio1;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeSet;
 
 public class Taller {
 
-	private Map<Matricula, Vehiculo> vehiculos;
-	private Set<Cliente> clientes;
-	private List<Reparacion> reparaciones;
+	private HashMap<Matricula, Vehiculo> vehiculos;
+	private TreeSet<Cliente> clientes;
+	private LinkedList<Reparacion> reparaciones;
 
 	public Taller() {
 		this.vehiculos = new HashMap<>();
@@ -19,75 +16,131 @@ public class Taller {
 		this.reparaciones = new LinkedList<>();
 	}
 
-	public Map<Matricula, Vehiculo> getVehiculos() {
-		return vehiculos;
-	}
-
-	public Set<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public List<Reparacion> getReparaciones() {
-		return reparaciones;
-	}
-
-	public void setVehiculos(Map<Matricula, Vehiculo> vehiculos) {
-		this.vehiculos = vehiculos;
-	}
-
-	public void setClientes(Set<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-
-	public void setReparaciones(List<Reparacion> reparaciones) {
-		this.reparaciones = reparaciones;
-	}
-
-	public void anadirVehiculo(Vehiculo vehiculo) {
-		if (!vehiculos.containsKey(vehiculo.getMatricula())) {
-			vehiculos.put(vehiculo.getMatricula(), vehiculo);
+	/**
+	 * Añade un vehiculo al taller No se permiten matrículas repetidas No se
+	 * permiten matrículas erróneas
+	 * 
+	 * @param Vehiculo : v
+	 * @throws Excepcion
+	 */
+	public void añadirVehiculo(Vehiculo v) throws Excepcion {
+		// Si la matrícula no está en el taller
+		if (!vehiculos.containsKey(v.getMatricula())) {
+			// Si la matrícula es correcta
+			if (!v.getMatricula().getMatricula().equals("")) {
+				vehiculos.put(v.getMatricula(), v);
+			}
+		} else {
+			throw new Excepcion("Vehiculo ya añadido");
 		}
 	}
 
-	public void eliminarVehiculo(Matricula matricula) {
-		vehiculos.remove(matricula);
-	}
-
-	public void anadirCliente(Cliente cliente) {
-		if (!clientes.contains(cliente)) {
-			clientes.add(cliente);
+	/**
+	 * Muestra los vehiculos al tener cada toString implementado en las subclases ya
+	 * se indica el tipo de vehiculo
+	 */
+	public void mostrarVehiculos() {
+		for (Vehiculo v : vehiculos.values()) {
+			System.out.println(v.toString());
 		}
 	}
 
-	public void eliminarCliente(Dni dni) {
-		clientes.removeIf(cliente -> cliente.getDni().equals(dni));
-	}
-
-	public void nuevaReparacion(Dni dniCliente, Matricula matriculaVehiculo, String fecha) {
-		if (clientes.contains(new Cliente(dniCliente, "", "")) && vehiculos.containsKey(matriculaVehiculo)) {
-			Reparacion reparacion = new Reparacion(reparaciones.size() + 1, dniCliente, matriculaVehiculo, fecha);
-			reparaciones.add(reparacion);
+	/**
+	 * Añade un cliente al taller No se permiten DNI repetidos No se permiten DNI
+	 * erróneos
+	 * 
+	 * @param Cliente : c
+	 * @throws Excepcion
+	 */
+	public void añadirCliente(Cliente c) throws Excepcion {
+		// Si el DNI no está en el taller
+		if (!clientes.contains(c)) {
+			// Si el DNI es correcto
+			if (!c.getDni().equals("")) {
+				clientes.add(c);
+			}
+		} else {
+			throw new Excepcion("Cliente ya añadido");
 		}
 	}
 
-	public void listarReparaciones() {
-		for (Reparacion reparacion : reparaciones) {
-			System.out.println(reparacion.toString());
+	/**
+	 * Muestra los clientes
+	 */
+	public void mostrarClientes() {
+		for (Cliente c : clientes) {
+			System.out.println(c.toString());
 		}
 	}
 
-	public void listarReparacionesCliente(Dni dni) throws ExceptionDniNoEncontrado {
-		for (Reparacion reparacion : reparaciones) {
-	        if (reparacion.getDniCliente().equals(dni)) {
-	            System.out.println(reparacion.toString());
-	        }
-	        throw new ExceptionDniNoEncontrado("Dni no encontrado");
+	/**
+	 * Crea una reparación El dni debe estar en el taller El dni debe cumplir con
+	 * las condiciones de la clase cliente La matricula debe estar en el taller
+	 * 
+	 * @param String    : dni
+	 * @param Matricula : matricula
+	 * @param String    : fecha
+	 * @throws Excepcion
+	 *
+	 */
+	public void crearReparacion(String dni, Matricula matricula, String fecha) throws Excepcion {
+
+		// Si el dni es correcto
+		if (Cliente.verificarDni(dni).equals("")) {
+			return;
+		}
+
+		// Si el DNI está en el taller
+		for (Cliente c : clientes) {
+			if (c.getDni().equals(dni)) {
+				// Si la matrícula está en el taller
+				if (vehiculos.containsKey(matricula)) {
+					reparaciones.add(new Reparacion(dni, matricula, fecha));
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * Muestra las reparaciones
+	 */
+	public void mostrarReparaciones() {
+		for (Reparacion r : reparaciones) {
+			System.out.println(r.toString());
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "Taller [vehiculos=" + vehiculos + ", clientes=" + clientes + ", reparaciones=" + reparaciones + "]";
+	/**
+	 * Muestra las reparaciones por cliente Si el dni no pertenece a ningún cliente
+	 * se muestra un mensaje de error
+	 * 
+	 * @param String : dni
+	 */
+	public void mostrarReparacionesCliente(String dni) {
+		// busca el cliente por dni
+		for (Cliente c : clientes) {
+			if (c.getDni().equals(dni)) {
+				// Si lo encuentra muestra las reparaciones
+				int contador = 0;
+				System.out.println("Reparaciones para el cliente con DNI " + dni);
+				String result = "";
+				for (Reparacion r : reparaciones) {
+					if (r.getDni().equals(dni)) {
+						result += r.toString() + "\n";
+						// contador para saber si hay reparaciones
+						contador++;
+					}
+				}
+				// Si no hay reparaciones
+				if (contador == 0) {
+					System.err.println("No hay reparaciones para el cliente con DNI " + dni);
+				} else {
+					System.out.println(result);
+				}
+				return;
+			}
+		}
 	}
 
 }
