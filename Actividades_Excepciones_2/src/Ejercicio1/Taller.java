@@ -21,19 +21,21 @@ public class Taller {
 	 * permiten matrículas erróneas
 	 * 
 	 * @param Vehiculo : v
-	 * @throws Excepcion
+	 * @throws ExcepcionTaller
 	 */
-	public void añadirVehiculo(Vehiculo v) throws Excepcion {
-		// Si la matrícula no está en el taller
-		if (!vehiculos.containsKey(v.getMatricula())) {
-			// Si la matrícula es correcta
-			if (!v.getMatricula().getMatricula().equals("")) {
-				vehiculos.put(v.getMatricula(), v);
-			}
-		} else {
-			throw new Excepcion("Vehiculo ya añadido");
-		}
-	}
+	public void añadirVehiculo(Vehiculo v) throws ExcepcionTaller {
+        // Si la matrícula no está en el taller
+        if (vehiculos.containsKey(v.getMatricula())) {
+            throw new ExcepcionTaller("La matrícula ya existe en el taller");
+        }
+
+        // Si la matrícula es correcta
+        if (v.getMatricula().getMatricula().equals("")) {
+            throw new ExcepcionTaller("La matrícula no es válida");
+        }
+
+        vehiculos.put(v.getMatricula(), v);
+    }
 
 	/**
 	 * Muestra los vehiculos al tener cada toString implementado en las subclases ya
@@ -50,19 +52,21 @@ public class Taller {
 	 * erróneos
 	 * 
 	 * @param Cliente : c
-	 * @throws Excepcion
+	 * @throws ExcepcionTaller
 	 */
-	public void añadirCliente(Cliente c) throws Excepcion {
-		// Si el DNI no está en el taller
-		if (!clientes.contains(c)) {
-			// Si el DNI es correcto
-			if (!c.getDni().equals("")) {
-				clientes.add(c);
-			}
-		} else {
-			throw new Excepcion("Cliente ya añadido");
-		}
-	}
+	public void añadirCliente(Cliente c) throws ExcepcionTaller {
+        // Si el DNI no está en el taller
+        if (clientes.contains(c)) {
+            throw new ExcepcionTaller("El DNI ya existe en el taller");
+        }
+
+        // Si el DNI es correcto
+        if (c.getDni().equals("")) {
+            throw new ExcepcionTaller("El DNI no es válido");
+        }
+
+        clientes.add(c);
+    }
 
 	/**
 	 * Muestra los clientes
@@ -80,27 +84,29 @@ public class Taller {
 	 * @param String    : dni
 	 * @param Matricula : matricula
 	 * @param String    : fecha
-	 * @throws Excepcion
+	 * @throws ExcepcionTaller
 	 *
 	 */
-	public void crearReparacion(String dni, Matricula matricula, String fecha) throws Excepcion {
+	public void crearReparacion(String dni, Matricula matricula, String fecha) throws ExcepcionTaller {
 
-		// Si el dni es correcto
-		if (Cliente.verificarDni(dni).equals("")) {
-			return;
-		}
+        // Si el dni es correcto
+        if (!Cliente.verificarDni(dni).equals("")) {
+            // Si el DNI está en el taller
+            for (Cliente c : clientes) {
+                if (c.getDni().equals(dni)) {
+                    // Si la matrícula está en el taller
+                    if (vehiculos.containsKey(matricula)) {
+                        reparaciones.add(new Reparacion(dni, matricula, fecha));
+                        return;
+                    }
+                }
+            }
 
-		// Si el DNI está en el taller
-		for (Cliente c : clientes) {
-			if (c.getDni().equals(dni)) {
-				// Si la matrícula está en el taller
-				if (vehiculos.containsKey(matricula)) {
-					reparaciones.add(new Reparacion(dni, matricula, fecha));
-				}
-			}
-		}
+            throw new ExcepcionTaller("El DNI no está en el taller o la matrícula no es válida");
+        }
 
-	}
+        throw new ExcepcionTaller("El DNI no es válido");
+    }
 
 	/**
 	 * Muestra las reparaciones
