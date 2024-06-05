@@ -14,9 +14,9 @@ import Modelo.Cliente;
 import Modelo.Matricula;
 
 public class GestorAutobus {
-	private HashMap<Matricula, Autobus> autobuses;
-	private Set<Cliente> clientes;
-	private List<Alquiler> alquileres;
+	public HashMap<Matricula, Autobus> autobuses;
+	public Set<Cliente> clientes;
+	public List<Alquiler> alquileres;
 
 	public GestorAutobus() {
 		this.autobuses = new HashMap<>();
