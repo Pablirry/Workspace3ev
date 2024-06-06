@@ -1,7 +1,7 @@
 package Ejercicio;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /*
  * De cada selección tenemos la siguiente información:
@@ -22,7 +22,7 @@ public class Seleccion {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.nombreSeleccionador = nombreSeleccionador;
-		this.jugadores = new HashSet<>();
+		this.jugadores = new TreeSet<>();
 	}
 
 	public int getCodigo() {

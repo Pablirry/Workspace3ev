@@ -30,5 +30,4 @@ public class Prueba {
 
         gestor.mostrarMaximoEdad(1);
     }
-
 }
