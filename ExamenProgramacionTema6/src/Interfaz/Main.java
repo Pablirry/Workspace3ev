@@ -91,30 +91,31 @@ public class Main {
 
 
 
+	@SuppressWarnings("unused")
 	private static void pruebaMatricula() {
-		// TODO Auto-generated method stub
+		
 		try {
 			Matricula m1 = new Matricula("1234-ABC");
 		} catch (FormatoExcepcion e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println(e.toString());
 		}
 		try {
 			Matricula m1 = new Matricula("1234ABC");
 		} catch (FormatoExcepcion e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println("1234ABC " + e.toString());
 		}
 		try {
 			Matricula m1 = new Matricula("123-ABCD");
 		} catch (FormatoExcepcion e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println("123-ABCD " + e.toString());
 		}
 		try {
 			Matricula m1 = new Matricula("12345-AB");
 		} catch (FormatoExcepcion e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println("12345-AB " + e.toString());
 		}
 		try {
@@ -213,14 +214,14 @@ public class Main {
 			a.alquilar("12/01/2024",5);
 			gestor.addAutobus(a);
 		} catch (FormatoExcepcion | ExamenExcepcion e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println(e.toString());
 		}
 
 	}
 
 	private static GestorAutobus cargarDatos() {
-		// TODO Auto-generated method stub
+		
 		GestorAutobus gestor = new GestorAutobus();
 		try {
 			gestor.addAutobus(new Autobus("1234-ABC", 5, 10.0));
@@ -244,7 +245,6 @@ public class Main {
 			gestor.alquilarAutocar("1237-ABC", "444X", "10/04/2024", 5, 100);
 
 		} catch (ExamenExcepcion | FormatoExcepcion e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.toString());
 		}
 		return gestor;

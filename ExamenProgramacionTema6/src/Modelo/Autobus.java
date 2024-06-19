@@ -27,6 +27,7 @@ public class Autobus {
 		}
 		int dia = Integer.parseInt(partes[0]);
 		int mes = Integer.parseInt(partes[1]);
+		@SuppressWarnings("unused")
 		int anio = Integer.parseInt(partes[2]);
 
 		// Verificar que el mes está en el rango válido
