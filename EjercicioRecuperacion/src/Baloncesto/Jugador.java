@@ -59,7 +59,7 @@ public class Jugador implements Comparable<Jugador> {
     @Override
     public String toString() {
         return "Jugador [nombre=" + nombre + ", altura=" + altura + ", minutosJugados=" + minutosJugados
-                + ", puntosPorPartido=" + puntosPorPartido + ", edad=" + edad + "]";
+                + ", puntosPorPartido=" + puntosPorPartido + ", edad=" + edad + "]\n\t";
     }
 
     @Override

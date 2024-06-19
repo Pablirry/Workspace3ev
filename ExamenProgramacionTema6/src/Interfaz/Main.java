@@ -11,14 +11,18 @@ public class Main {
 
 	public static void main(String[] args) throws FormatoExcepcion, ExamenExcepcion {
 		// TODO Auto-generated method stub
-		// pruebaFecha();
-		// pruebaMatricula();
-		// pruebaAutobus();
+		pruebaFecha();
+		System.out.println("**********************************************");
+		pruebaMatricula();
+		System.out.println("**********************************************");
+		pruebaAutobus();
+		System.out.println("**********************************************");
 		pruebaListarAlquileresAutobus(cargarDatos());
-		// pruebaListarAlquileresCliente(cargarDatos());
+		System.out.println("**********************************************");
+		pruebaListarAlquileresCliente(cargarDatos());
 		// pruebaAutocaresDisponibles(cargarDatos());
-		
-		// pruebaGenerarFactura(cargarDatos());
+		System.out.println("**********************************************");
+		pruebaGenerarFactura(cargarDatos());
 	}
 
 	private static void pruebaGenerarFactura(GestorAutobus gestor) throws ExamenExcepcion {
